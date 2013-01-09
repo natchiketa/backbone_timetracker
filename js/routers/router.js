@@ -3,7 +3,7 @@ var app = app || {};
 (function() {
 	'use strict';
 
-	// Todo Router
+	// Time Block Router
 	// ----------
 
 	var Workspace = Backbone.Router.extend({
@@ -13,15 +13,15 @@ var app = app || {};
 
 		setFilter: function( param ) {
 			// Set the current filter to be used
-			app.TodoFilter = param.trim() || '';
+			app.TimeBlockFilter = param.trim() || '';
 
 			// Trigger a collection filter event, causing hiding/unhiding
-			// of Todo view items
-			app.Todos.trigger('filter');
+			// of Time Block view items
+			app.TimeBlocks.trigger('filter');
 		}
 	});
 
-	app.TodoRouter = new Workspace();
+	app.TimeBlockRouter = new Workspace();
 	Backbone.history.start();
 
 }());

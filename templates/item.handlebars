@@ -1,6 +1,8 @@
 <div class="view">
-    <input class="toggle" type="checkbox" {{{ternary completed "checked" ""}}}>
-    <label>{{title}}</label>
+    <div class="itemstate"><i class="{{{ternary completed "icon-ok" "icon-time"}}}"></i></div>
+    <div class="timevals">
+        <div class="start timestamp">{{{dateformat start}}}</div>
+        <div class="stop timestamp {{{ternary completed "" "running"}}}">{{{dateformat stop}}}</div>
+    </div>
     <button class="destroy"></button>
 </div>
-<input class="edit" value="{{title}}">

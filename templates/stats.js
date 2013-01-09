@@ -7,7 +7,7 @@ templates['stats'] = template(function (Handlebars,depth0,helpers,partials,data)
 function program1(depth0,data) {
   
   var buffer = "", stack1, foundHelper;
-  buffer += "\n    <button id=\"clear-completed\">Clear completed (";
+  buffer += "\n    <button class=\"btn btn-mini\" id=\"clear-completed\">Clear completed (";
   foundHelper = helpers.completed;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.completed; stack1 = typeof stack1 === functionType ? stack1() : stack1; }

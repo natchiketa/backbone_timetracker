@@ -4,8 +4,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>Time Tracker</title>
-	<link rel="stylesheet" href="css/base.css">
-	<!--[if IE]>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/base.css">
+    <!--[if IE]>
 	<script src="js/ie.js"></script>
 	<![endif]-->
 </head>
@@ -13,36 +14,41 @@
 	<section id="timetrackerapp">
 		<header id="header">
 			<h1>time tracker</h1>
-			<input id="new-todo" placeholder="What needs to be done?" autofocus>
+			<button id="new-timeblock" class="btn btn-primary">Start a new time block</button>
 		</header>
 		<section id="main">
 			<input id="toggle-all" type="checkbox">
 			<label for="toggle-all">Mark all as complete</label>
-			<ul id="todo-list"></ul>
+			<dl id="timeblock-list"></dl>
 		</section>
 		<footer id="footer"></footer>
 	</section>
 	<div id="info">
-		<p>Double-click to edit a todo</p>
-		<p>Written by <a href="https://github.com/addyosmani">Addy Osmani</a></p>
-		<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+		<p>Double-click to edit a time block</p>
+		<p>Adaptation by <a href="https://github.com/natchiketa" target="_blank">Sal Lara</a>, based on the <a href="http://todomvc.com">TodoMVC</a> app written by <a href="https://github.com/addyosmani" target="_blank">Addy Osmani</a></p>
 	</div>
 
 	<script src="js/base.js"></script>
 
+    <!--Handlebars-->
     <script src="js/lib/handlebars-1.0.rc.1.js"></script>
+    <!--Custom helpers-->
     <script src="js/nat-hb-helpers.js"></script>
-    <!--Compiled Handlebars templates-->
+    <!--Compiled templates-->
     <script src="templates/item.js"></script>
     <script src="templates/stats.js"></script>
+    <script src="templates/dategroup.js"></script>
+
+    <script src="js/lib/sugar-1.3.7.js"></script>
+    <script src="js/lib/minidaemon.js"></script>
 
     <script src="js/lib/jquery-1.8.2.js"></script>
 	<script src="js/lib/lodash.underscore.js"></script>
 	<script src="js/lib/backbone.js"></script>
 	<script src="js/lib/backbone-localstorage.js"></script>
-	<script src="js/models/todo.js"></script>
-	<script src="js/collections/todos.js"></script>
-	<script src="js/views/todos.js"></script>
+	<script src="js/models/timeblock.js"></script>
+	<script src="js/collections/timeblocks.js"></script>
+	<script src="js/views/timeblock.js"></script>
 	<script src="js/views/app.js"></script>
 	<script src="js/routers/router.js"></script>
 	<script src="js/app.js"></script>
