@@ -34,6 +34,14 @@ var app = app || {};
                 stop: Date.create().format(Date.ISO8601_DATETIME),
                 completed: true
             });
+        },
+
+        // Use the formatted timestamp string (e.g. "6:14:40 pm") to update the value for this.start or this.stop
+        setTimeVal: function(targetAttr, timeVal) {
+            var saveObj = {};
+            var shortDate = Date.create(this.get(targetAttr)).short();
+            saveObj[targetAttr] = Date.create( shortDate + ' ' + timeVal);
+            this.save(saveObj);
         }
 
 	});

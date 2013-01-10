@@ -1,8 +1,14 @@
 <div class="view">
     <div class="itemstate"><i class="{{{ternary completed "icon-ok" "icon-time"}}}"></i></div>
     <div class="timevals">
-        <div class="start timestamp">{{{dateformat start}}}</div>
-        <div class="stop timestamp {{{ternary completed "" "running"}}}">{{{dateformat stop}}}</div>
+        <div class="timeval-grp">
+            <div class="start timestamp">{{{dateformat start}}}</div>
+            <input class="edit" type="text" data-target-attr="start">
+        </div>
+        <div class="timeval-grp">
+            <div class="stop timestamp {{{ternary completed "" "running"}}}">{{{dateformat stop}}}</div>
+            <input class="edit" type="text" data-target-attr="stop">
+        </div>
     </div>
     <button class="destroy"></button>
 </div>
