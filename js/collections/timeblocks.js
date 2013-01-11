@@ -59,8 +59,8 @@ var app = app || {};
         // returns `false`.
         sameDayAsLast: function(order) {
             if (this.blockAtPosition(order) && this.blockAtPosition(order - 1)) {
-                var thisBlockDate = Date.create(this.blockAtPosition(order).start).format("{Dow} {Mon} {ord}");
-                return Date.create(this.blockAtPosition(order - 1).start).is(thisBlockDate);
+                var thisBlockDate = Date.create(this.blockAtPosition(order).get('start')).format("{Dow} {Mon} {ord}");
+                return Date.create(this.blockAtPosition(order - 1).get('start')).is(thisBlockDate);
             } else {
                 return false;
             }

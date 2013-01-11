@@ -102,7 +102,7 @@ $(function () {
 
         // Remove the item, destroy the model from *localStorage* and delete its view.
         clear: function () {
-            var prevElIsDt = !!this.$el.prev()[0] ? !!this.$el.prev()[0].tagName == 'DT' : false;
+            var prevElIsDt = !!this.$el.prev()[0] ? this.$el.prev()[0].tagName == 'DT' : false;
             if (prevElIsDt) {
                 this.$el.prev().remove();
             }

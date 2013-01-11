@@ -25,6 +25,6 @@ templates['item'] = template(function (Handlebars,depth0,helpers,partials,data) 
   foundHelper = helpers.dateformat;
   stack1 = foundHelper ? foundHelper.call(depth0, stack1, {hash:{}}) : helperMissing.call(depth0, "dateformat", stack1, {hash:{}});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</div>\n            <input class=\"edit\" type=\"text\" data-target-attr=\"stop\">\n        </div>\n    </div>\n    <button class=\"destroy\"></button>\n</div>\n";
+  buffer += "</div>\n            <input class=\"edit\" type=\"text\" data-target-attr=\"stop\">\n        </div>\n        <div class=\"totalhrs\"></div>\n    </div>\n    <button class=\"destroy\"></button>\n</div>\n";
   return buffer;});
 })();

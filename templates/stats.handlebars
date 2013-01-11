@@ -1,4 +1,3 @@
-<span id="todo-count"><strong>{{remaining}}</strong> {{{pluralize remaining "item" "items"}}} left</span>
 <ul id="filters">
     <li>
         <a class="selected" href="#/">All</a>
@@ -7,6 +6,9 @@
         <a href="#/completed">Completed</a>
     </li>
 </ul>
-{{#if completed}}
-    <button class="btn btn-mini" id="clear-completed">Clear completed ({{completed}})</button>
-{{/if}}
+
+<div id="rounding" class="btn-group" data-toggle="buttons-radio">
+    <button type="button" class="btn btn-mini btn-primary">Exact time</button>
+    <button type="button" class="btn btn-mini btn-primary">Nearest 15 minutes</button>
+    <button type="button" class="btn btn-mini btn-primary">Nearest 30 minutes</button>
+</div>

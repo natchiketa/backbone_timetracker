@@ -31,7 +31,6 @@ $(function( $ ) {
 		// loading any preexisting todos that might be saved in *localStorage*.
 		initialize: function() {
 			this.input = this.$('#new-timeblock');
-			this.allCheckbox = this.$('#toggle-all')[0];
 			this.$footer = this.$('#footer');
 			this.$main = this.$('#main');
 
@@ -44,6 +43,8 @@ $(function( $ ) {
 
 			app.TimeBlocks.fetch();
 
+            this.renderStats();
+
             // Using MiniDaemon since setInterval does not pass the model as `this` to
             // the callback.
             // See https://developer.mozilla.org/en-US/docs/DOM/window.setInterval#The_.22this.22_problem
@@ -55,29 +56,32 @@ $(function( $ ) {
 		// Re-rendering the App just means refreshing the statistics -- the rest
 		// of the app doesn't change.
 		render: function() {
-			var completed = app.TimeBlocks.completed().length;
-			var remaining = app.TimeBlocks.remaining().length;
 
-			if ( app.TimeBlocks.length ) {
-				this.$main.show();
-				this.$footer.show();
 
-				this.$footer.html(this.statsTemplate({
-					completed: completed,
-					remaining: remaining
-				}));
-
-				this.$('#filters li a')
-					.removeClass('selected')
-					.filter('[href="#/' + ( app.TimeBlockFilter || '' ) + '"]')
-					.addClass('selected');
-			} else {
-				this.$main.hide();
-				this.$footer.hide();
-			}
-
-			this.allCheckbox.checked = !remaining;
 		},
+
+        renderStats: function() {
+            var completed = app.TimeBlocks.completed().length;
+            var remaining = app.TimeBlocks.remaining().length;
+
+            if ( app.TimeBlocks.length ) {
+                this.$main.show();
+                this.$footer.show();
+
+                this.$footer.html(this.statsTemplate({
+                    completed: completed,
+                    remaining: remaining
+                }));
+
+                this.$('#filters li a')
+                    .removeClass('selected')
+                    .filter('[href="#/' + ( app.TimeBlockFilter || '' ) + '"]')
+                    .addClass('selected');
+            } else {
+                this.$main.hide();
+                this.$footer.hide();
+            }
+        },
 
 		// Add a single time block to the list by creating a view for it, and
 		// appending its element to the `<ul>`.

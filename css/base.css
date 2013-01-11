@@ -9,7 +9,7 @@ body {
 	line-height: 1.4em;
 	background: #eaeaea url('../img/bg.png');
 	color: #4d4d4d;
-	width: 550px;
+	width: 640px;
 	margin: 0 auto;
 	-webkit-font-smoothing: antialiased;
 	-moz-font-smoothing: antialiased;
@@ -97,9 +97,11 @@ body {
 #new-todo,
 .edit {
 	position: relative;
-    padding: 2px 10px !important;
+    
+	padding: 12px !important;
     margin-bottom: 0 !important;
-    width: 144px !important;
+    
+	width: 150px !important;
     height: 34px !important;
     font-size: 24px !important;
 	font-family: inherit;
@@ -185,9 +187,11 @@ label[for='toggle-all'] {
     font-variant: small-caps;
 }
 
-#timeblock-list dd .timestamp, .dategroup {
+#timeblock-list dd .timestamp, .dategroup, .totalhrs {
     display: inline-block;
     padding: 12px;
+    width: 150px;
+    text-align: right;
 }
 
 .itemstate {
@@ -273,6 +277,8 @@ label[for='toggle-all'] {
 #timeblock-list dd .destroy {
 	display: none;
 	position: absolute;
+    background: none;
+    border: none;
 	top: 0;
 	right: 10px;
 	bottom: 0;
@@ -350,9 +356,7 @@ label[for='toggle-all'] {
 	margin: 0;
 	padding: 0;
 	list-style: none;
-	position: absolute;
-	right: 0;
-	left: 0;
+    float: left;
 }
 
 #filters li {
@@ -374,16 +378,10 @@ label[for='toggle-all'] {
 	position: relative;
 	line-height: 20px;
 	text-decoration: none;
-	/*background: rgba(0, 0, 0, 0.1);
-	font-size: 11px;
-	padding: 0 10px;
-	border-radius: 3px;
-	box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.2);*/
 }
 
-#clear-completed:hover {
-	background: rgba(0, 0, 0, 0.15);
-	box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.3);
+#rounding {
+    float: right;
 }
 
 #info {
