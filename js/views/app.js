@@ -114,7 +114,8 @@ $(function( $ ) {
 			return {
 				order: app.TimeBlocks.nextOrder(),
                 start: Date.create().format(Date.ISO8601_DATETIME),
-                stop: Date.create().format(Date.ISO8601_DATETIME)
+                stop: Date.create().format(Date.ISO8601_DATETIME),
+                description: ""
 			};
 		},
 

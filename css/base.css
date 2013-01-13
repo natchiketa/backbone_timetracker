@@ -94,11 +94,10 @@ body {
 	border-top-right-radius: 1px;
 }
 
-#new-todo, .edit {
+.edit {
 	position: relative;
 	padding: 0 12px !important;
 	margin: 0 16px 0 !important;
-	width: 160px !important;
 	height: 34px !important;
     font-size: 24px !important;
 	font-family: inherit;
@@ -114,7 +113,15 @@ body {
 	-ms-font-smoothing: antialiased;
 	-o-font-smoothing: antialiased;
 	font-smoothing: antialiased;
-	text-align: right !important;
+}
+
+.timestamp .edit {
+    width: 160px !important;
+    text-align: right !important;
+}
+
+.description .edit {
+    width: 300px !important;
 }
 
 #new-timeblock {
@@ -198,8 +205,26 @@ label[for='toggle-all'] {
     top: 14px;
 }
 
-.timeval-grp, .timevals {
+.timeval-grp, .timevals, .description, .desclabel {
     display: inline-block;
+}
+
+.description .icon-info-sign {
+    margin: 8px;
+}
+
+.description.editing .icon-info-sign {
+    display: none;
+}
+
+.desclabel {
+    width: 130px;
+    min-height: 24px;
+    padding: 2px 0;
+    margin: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .timeval-grp:first-child {
@@ -223,8 +248,12 @@ label[for='toggle-all'] {
 	display: inline-block;
 }
 
-#timeblock-list dd .editing .timestamp {
+#timeblock-list dd .editing .tb-label {
 	display: none;
+}
+
+.description.editing + .totalhrs {
+    display: none;
 }
 
 #timeblock-list dd .toggle {
@@ -257,19 +286,6 @@ label[for='toggle-all'] {
 	text-shadow: 0 1px 0 #669991;
 	bottom: 1px;
 	position: relative;
-}
-
-#timeblock-list dd label {
-	word-break: break-word;
-	padding: 15px;
-	margin-left: 45px;
-	display: block;
-	line-height: 1.2;
-	-webkit-transition: color 0.4s;
-	-moz-transition: color 0.4s;
-	-ms-transition: color 0.4s;
-	-o-transition: color 0.4s;
-	transition: color 0.4s;
 }
 
 #timeblock-list .stop.running {

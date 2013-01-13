@@ -18,7 +18,8 @@ $(function () {
         // The DOM events specific to an item.
         events: {
             'click .toggle': 'togglecompleted',
-            'dblclick .timestamp:visible': 'edit',
+            'dblclick .tb-label:visible': 'edit',
+            'dblclick .desclabel:visible': 'edit',
             'click .destroy': 'clear',
             'keyup .edit': 'updateOnEnter',
             'blur .edit': 'close',
@@ -38,10 +39,10 @@ $(function () {
 
         // Re-render the titles of the time block item.
         render: function () {
-            this.$el.html(this.template(this.model.toJSON()));
+            var context = _.extend(this.model.toJSON(), {totalHrs: this.model.totalhrs()});
+            this.$el.html(this.template(context));
             this.$el.toggleClass('running', !this.model.get('completed'));
             this.$el.toggleClass('completed', this.model.get('completed'));
-
             this.toggleVisible();
             return this;
         },
@@ -83,8 +84,13 @@ $(function () {
         close: function (event) {
             var group = this.timevalGroup(event);
             var value = group.input.val().trim();
-            if (value && event.which !== ESC_KEY) {
+            if (value && event.which !== ESC_KEY && group.targetAttr != 'description') {
                 this.model.setTimeVal(group.targetAttr, value);
+            }
+            if (value && event.which !== ESC_KEY && group.targetAttr == 'description') {
+                this.model.save({
+                    description: value
+                });
             }
             group.el.removeClass('editing');
         },
@@ -103,7 +109,7 @@ $(function () {
             var $tvGrp = ($tgt.hasClass('timeval-grp')) ? $tgt : $tgt.parents('.timeval-grp');
             return {
                 el: $tvGrp,
-                label: $tvGrp.find('.timestamp'),
+                label: $tvGrp.find('.tb-label'),
                 input: $tvGrp.find('input'),
                 targetAttr: $tvGrp.find('input').attr("data-target-attr")
             }

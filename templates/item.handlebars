@@ -2,14 +2,19 @@
     <div class="itemstate"><i class="{{{ternary completed "icon-ok" "icon-time"}}}"></i></div>
     <div class="timevals">
         <div class="timeval-grp">
-            <div class="start timestamp">{{{dateformat start}}}</div>
+            <div class="start timestamp tb-label ">{{{dateformat start}}}</div>
             <input class="edit" type="text" data-target-attr="start">
         </div>
         <div class="timeval-grp">
-            <div class="stop timestamp {{{ternary completed "" "running"}}}">{{{dateformat stop}}}</div>
+            <div class="stop timestamp tb-label {{{ternary completed "" "running"}}}">{{{dateformat stop}}}</div>
             <input class="edit" type="text" data-target-attr="stop">
         </div>
-        <div class="totalhrs"></div>
+        <div class="description timeval-grp">
+            <i class="icon-info-sign"></i>
+            <label class="desclabel tb-label" for="description">{{description}}</label>
+            <input class="edit" name="description" type="text" data-target-attr="description">
+        </div>
+        <div class="totalhrs">{{totalHrs}} {{{pluralize totalHrs "hr" "hrs"}}}</div>
     </div>
     <button class="destroy"></button>
 </div>

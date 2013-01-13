@@ -12,7 +12,7 @@ var app = app || {};
 		// Default attributes for the time block
 		defaults: {
 			title: '',
-            round: "nearest 15 minutes",
+            round: 15,
 			completed: false
 		},
 
@@ -33,6 +33,25 @@ var app = app || {};
                 stop: Date.create().format(Date.ISO8601_DATETIME),
                 completed: true
             });
+        },
+
+        // calculate the duration of the timeblock, return as number of hours (e.g. if
+        // start time was 12:00 pm and stop time was 2:30 pm, will return 2.5). The round
+        // attribute is used, so a range of 1 hour and 40 minutes would return 1.666 if
+        // round == 1, 1.75 if round == 15, or 1.5 if round == 30.
+        totalhrs: function() {
+            var range = this.blockRange();
+            var totalHours = range.stop.hoursSince(range.start);
+            var totalMins = range.stop.minutesSince(range.start);
+            var rndAmt = (typeof this.get('round') == "string") ? Number(this.get('round').replace(/.*?([0-9]+).*/, '$1')) : this.get('round');
+            return (totalHours + ((totalMins / rndAmt).round() * (rndAmt / 60)));
+        },
+
+        blockRange: function() {
+            return {
+                start: Date.create(this.get('start')),
+                stop: Date.create(this.get('stop'))
+            }
         },
 
         // Use the formatted timestamp string (e.g. "6:14:40 pm") to update the value for this.start or this.stop

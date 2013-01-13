@@ -12,3 +12,7 @@ Handlebars.registerHelper('dateformat', function(date, formatstring) {
     formatstring = (typeof formatstring != 'string') ? '{12hr}:{mm}:{ss} {tt}' : formatstring;
     return new Handlebars.SafeString(Date.create(date).format(formatstring));
 });
+
+Handlebars.registerHelper('timeRange', function(start, stop, round) {
+    return new Handlebars.SafeString()
+});
