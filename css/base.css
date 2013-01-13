@@ -9,7 +9,7 @@ body {
 	line-height: 1.4em;
 	background: #eaeaea url('../img/bg.png');
 	color: #4d4d4d;
-	width: 640px;
+	width: 800px;
 	margin: 0 auto;
 	-webkit-font-smoothing: antialiased;
 	-moz-font-smoothing: antialiased;
@@ -94,15 +94,12 @@ body {
 	border-top-right-radius: 1px;
 }
 
-#new-todo,
-.edit {
+#new-todo, .edit {
 	position: relative;
-    
-	padding: 12px !important;
-    margin-bottom: 0 !important;
-    
-	width: 150px !important;
-    height: 34px !important;
+	padding: 0 12px !important;
+	margin: 0 16px 0 !important;
+	width: 160px !important;
+	height: 34px !important;
     font-size: 24px !important;
 	font-family: inherit;
 	line-height: 1.4em !important;
@@ -117,6 +114,7 @@ body {
 	-ms-font-smoothing: antialiased;
 	-o-font-smoothing: antialiased;
 	font-smoothing: antialiased;
+	text-align: right !important;
 }
 
 #new-timeblock {
@@ -204,8 +202,12 @@ label[for='toggle-all'] {
     display: inline-block;
 }
 
-#timeblock-list dd .timeval-grp:first-child {
+.timeval-grp:first-child {
     margin-left: 48px;
+}
+
+.timeval-grp {
+    width: 170px;
 }
 
 #timeblock-list dd:last-child {
@@ -218,7 +220,7 @@ label[for='toggle-all'] {
 }
 
 #timeblock-list dd .editing .edit {
-	display: block;
+	display: inline-block;
 }
 
 #timeblock-list dd .editing .timestamp {

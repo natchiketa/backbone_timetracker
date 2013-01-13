@@ -10,7 +10,6 @@ var app = app || {};
 	app.TimeBlock = Backbone.Model.extend({
 
 		// Default attributes for the time block
-		// and ensure that each time block created has a title and a start time.
 		defaults: {
 			title: '',
             round: "nearest 15 minutes",

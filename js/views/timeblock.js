@@ -18,10 +18,13 @@ $(function () {
         // The DOM events specific to an item.
         events: {
             'click .toggle': 'togglecompleted',
-            'dblclick .timeval-grp': 'edit',
+            'dblclick .timestamp:visible': 'edit',
             'click .destroy': 'clear',
             'keyup .edit': 'updateOnEnter',
-            'blur .edit': 'close'
+            'blur .edit': 'close',
+            'click .itemstate': 'togglecompleted',
+            'mouseenter .itemstate': 'toggleaction',
+            'mouseleave .itemstate': 'toggleaction'
         },
 
         // The TimeBlockView listens for changes to its model, re-rendering. Since there's
@@ -60,11 +63,17 @@ $(function () {
             this.model.toggle();
         },
 
+        toggleaction: function() {
+            if (this.$el.is($(this.$el.parents('dl').find('dd:last-child'))[0])) {
+                this.$el.find('.itemstate i').toggleClass('icon-ok icon-time');
+            }
+        },
+
         // Switch this view into `"editing"` mode, displaying the input field.
         edit: function (event) {
             var group = this.timevalGroup(event);
-            if (group.el.hasClass('running')) {
-                this.togglecompleted();
+            if (this.$el.hasClass('running')) {
+                this.model.stopclock();
             }
             group.el.addClass('editing');
             group.input.val(group.label.text()).focus();
