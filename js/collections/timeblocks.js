@@ -23,6 +23,15 @@ var app = app || {};
 			});
 		},
 
+        //TODO: store rounding option without
+        getRounding: function() {
+            return !!this.localStorage['roundingVal'] ? this.localStorage['roundingVal'] : this.localStorage['roundingVal'] = 1;
+        },
+
+        setRounding: function(rndVal) {
+            return this.localStorage['roundingVal'] = rndVal;
+        },
+
 		// Filter down the list of all time block items that are still running.
 		running: function() {
 			return this.without.apply( this, this.completed() );

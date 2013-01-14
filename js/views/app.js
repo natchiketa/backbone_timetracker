@@ -23,7 +23,8 @@ $(function( $ ) {
 		events: {
 			'click #new-timeblock': 'createOrStop',
 			'click #clear-completed': 'clearCompleted',
-			'click #toggle-all': 'stopAllBlocks'
+			'click #toggle-all': 'stopAllBlocks',
+            'click #rounding>.btn': 'updateRounding'
 		},
 
 		// At initialization we bind to the relevant events on the `Todos`
@@ -73,6 +74,9 @@ $(function( $ ) {
                     remaining: remaining
                 }));
 
+                this.$footer.find('#rounding .btn[data-roundamt="' + app.TimeBlocks.getRounding() + '"]')
+                    .addClass('active');
+
                 this.$('#filters li a')
                     .removeClass('selected')
                     .filter('[href="#/' + ( app.TimeBlockFilter || '' ) + '"]')
@@ -81,6 +85,13 @@ $(function( $ ) {
                 this.$main.hide();
                 this.$footer.hide();
             }
+        },
+
+        updateRounding: function(event) {
+            event.preventDefault();
+            var rndVal = $(event.target).data('roundamt');
+            app.TimeBlocks.setRounding(rndVal);
+            app.TimeBlocks.trigger('reset');
         },
 
 		// Add a single time block to the list by creating a view for it, and

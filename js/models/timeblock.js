@@ -41,10 +41,9 @@ var app = app || {};
         // round == 1, 1.75 if round == 15, or 1.5 if round == 30.
         totalhrs: function() {
             var range = this.blockRange();
-            var totalHours = range.stop.hoursSince(range.start);
             var totalMins = range.stop.minutesSince(range.start);
-            var rndAmt = (typeof this.get('round') == "string") ? Number(this.get('round').replace(/.*?([0-9]+).*/, '$1')) : this.get('round');
-            return (totalHours + ((totalMins / rndAmt).round() * (rndAmt / 60)));
+            var rndAmt = app.TimeBlocks.getRounding();
+            return ((totalMins / rndAmt).round() * (rndAmt / 60));
         },
 
         blockRange: function() {
