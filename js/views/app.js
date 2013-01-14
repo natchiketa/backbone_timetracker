@@ -22,6 +22,7 @@ $(function( $ ) {
 		// Delegated events for creating new items, and clearing completed ones.
 		events: {
 			'click #new-timeblock': 'createOrStop',
+            'keyup .new-time-string': 'createOrStop',
 			'click #clear-completed': 'clearCompleted',
 			'click #toggle-all': 'stopAllBlocks',
             'click #rounding>.btn': 'updateRounding'
@@ -31,11 +32,18 @@ $(function( $ ) {
 		// collection, when items are added or changed. Kick things off by
 		// loading any preexisting todos that might be saved in *localStorage*.
 		initialize: function() {
+
 			this.input = this.$('#new-timeblock');
+            this.timeOpts = this.$('.new-time-string');
 			this.$footer = this.$('#footer');
 			this.$main = this.$('#main');
 
-			app.TimeBlocks.on( 'add', this.addOne, this );
+            $(window).on('keyup', function(event) {
+                app.AppView.prototype.focusTimeOpts.call(app.AppView, event)
+            });
+
+
+            app.TimeBlocks.on( 'add', this.addOne, this );
 			app.TimeBlocks.on( 'reset', this.addAll, this );
 			app.TimeBlocks.on( 'change:completed', this.filterOne, this );
             app.TimeBlocks.on( 'filter', this.filterAll, this );
@@ -53,6 +61,10 @@ $(function( $ ) {
             runningTimeUpdate.start();
 
 		},
+
+        remove: function() {
+            $(window).off('keyup')
+        },
 
 		// Re-rendering the App just means refreshing the statistics -- the rest
 		// of the app doesn't change.
@@ -122,11 +134,14 @@ $(function( $ ) {
 
 		// Generate the attributes for a new Time Block item.
 		newAttributes: function() {
+            var newDateOpts = !!(Date.create(this.timeOpts.val()) != 'Invalid Date') ? this.timeOpts.val() : '';
+            if (!!newDateOpts) this.timeOpts.val('');
 			return {
 				order: app.TimeBlocks.nextOrder(),
-                start: Date.create().format(Date.ISO8601_DATETIME),
-                stop: Date.create().format(Date.ISO8601_DATETIME),
-                description: ""
+                start: Date.create(newDateOpts).format(Date.ISO8601_DATETIME),
+                stop: Date.create(newDateOpts).format(Date.ISO8601_DATETIME),
+                description: "",
+                completed: !!newDateOpts
 			};
 		},
 
@@ -137,12 +152,23 @@ $(function( $ ) {
 		// If you hit return in the main input field, create new **TimeBlock** model,
 		// persisting it to *localStorage*.
         createOrStop: function( e ) {
+
+            if ($(e.target).hasClass('new-time-string') && e.which != ENTER_KEY) {
+                return
+            }
+
             if (!!app.TimeBlocks.running().length) {
                 app.TimeBlocks.last().stopclock();
             } else {
                 app.TimeBlocks.create(this.newAttributes());
             }
 		},
+
+        focusTimeOpts: function(event) {
+            if (event.which == 	'78' && event.ctrlKey) {
+                $('.new-time-string').trigger('focus')
+            }
+        },
 
 		// Clear all completed time block items, destroying their models.
 		clearCompleted: function() {

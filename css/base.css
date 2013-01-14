@@ -125,8 +125,14 @@ body {
     font-size: 12px;
 }
 
+.new-time-string {
+    width: 512px !important;
+    font-size: 15px !important;
+    margin: 16px 0px 16px 48px !important;
+}
+
 #new-timeblock {
-    margin: 12px 60px;
+    margin: 12px 8px;
 	z-index: 2;
 }
 
@@ -206,7 +212,7 @@ label[for='toggle-all'] {
     top: 14px;
 }
 
-.timeval-grp, .timevals, .description, .desclabel {
+.timeval-grp, .timevals, .description, .desclabel, .new-time-string {
     display: inline-block;
 }
 
