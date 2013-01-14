@@ -35,15 +35,16 @@ var app = app || {};
             });
         },
 
-        // calculate the duration of the timeblock, return as number of hours (e.g. if
+        // Calculate the duration of the timeblock, return as number of hours (e.g. if
         // start time was 12:00 pm and stop time was 2:30 pm, will return 2.5). The round
         // attribute is used, so a range of 1 hour and 40 minutes would return 1.666 if
         // round == 1, 1.75 if round == 15, or 1.5 if round == 30.
-        totalhrs: function() {
+        totalhrs: function(rounded) {
+            rounded = (typeof rounded == 'undefined') ? true : rounded;
             var range = this.blockRange();
             var totalMins = range.stop.minutesSince(range.start);
             var rndAmt = app.TimeBlocks.getRounding();
-            return ((totalMins / rndAmt).round() * (rndAmt / 60));
+            return rounded? ((totalMins / rndAmt).round() * (rndAmt / 60)) : (totalMins / 60);
         },
 
         blockRange: function() {
@@ -57,7 +58,7 @@ var app = app || {};
         setTimeVal: function(targetAttr, timeVal) {
             var saveObj = {};
             var shortDate = Date.create(this.get(targetAttr)).short();
-            saveObj[targetAttr] = Date.create( shortDate + ' ' + timeVal);
+            saveObj[targetAttr] = Date.create( shortDate + ' ' + timeVal).format(Date.ISO8601_DATETIME);
             this.save(saveObj);
         }
 

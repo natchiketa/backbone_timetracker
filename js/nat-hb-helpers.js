@@ -13,6 +13,7 @@ Handlebars.registerHelper('dateformat', function(date, formatstring) {
     return new Handlebars.SafeString(Date.create(date).format(formatstring));
 });
 
-Handlebars.registerHelper('timeRange', function(start, stop, round) {
-    return new Handlebars.SafeString()
+Handlebars.registerHelper('totalHours', function(hours, rndAmt) {
+    rndAmt = (typeof rndAmt == 'undefined') ? false : rndAmt;
+    return new Handlebars.SafeString(rndAmt? ((hours / rndAmt).round() * (rndAmt / 60)) : (hours / 60));
 });

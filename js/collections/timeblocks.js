@@ -23,7 +23,17 @@ var app = app || {};
 			});
 		},
 
-        //TODO: store rounding option without
+		// List of time block items filtered by `dateStr` which is any valid argument for the
+		// SugarJS create() method. The values for the start/stop attributes can be used as-
+		// is. See http://sugarjs.com/dates for more options.
+	    forDate: function(dateStr) {
+			return this.filter(function( timeblock ) {
+                var day = Date.create(dateStr).short();
+				return Date.create(timeblock.get('start')).is(day);
+			});
+		},
+
+        //TODO: Is it okay to store rounding option without circumventing sync adapter?
         getRounding: function() {
             return !!localStorage['roundingVal'] ? localStorage['roundingVal'] : localStorage['roundingVal'] = 1;
         },
@@ -37,7 +47,7 @@ var app = app || {};
 			return this.without.apply( this, this.completed() );
 		},
 
-        //TODO: refactor to use more semantically correct function above
+        //TODO: Refactor to use more semantically correct function above.
 		// Filter down the list to only time block items that are still running.
 		remaining: function() {
 			return this.without.apply( this, this.completed() );
@@ -75,9 +85,14 @@ var app = app || {};
             }
         },
 
+        // Uses above function to compare to date of next block
+        sameDayAsNext: function(order) {
+            return this.sameDayAsLast(order + 1);
+        },
+
 		// Todos are sorted by their original insertion order.
 		comparator: function( timeblock ) {
-			return timeblock.get('order');
+			return Date.create(timeblock.get('start')).getTime();
 		}
 
 	});

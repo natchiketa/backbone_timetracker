@@ -19,6 +19,9 @@ $(function( $ ) {
         // Template for the Date heading preceding a group of date blocks with the same date.
         dateGroupTemplate: Handlebars.templates.dategroup,
 
+        // Template for the date footer which calculates total hours for a date.
+        dateTotalHrsTemplate: Handlebars.templates.datetotalhrs,
+
 		// Delegated events for creating new items, and clearing completed ones.
 		events: {
 			'click #new-timeblock': 'createOrStop',
@@ -110,12 +113,26 @@ $(function( $ ) {
 		// appending its element to the `<ul>`.
 		addOne: function( timeblock ) {
 			var view = new app.TimeBlockView({ model: timeblock });
+
+            // If the current date is different than the last,
             if ( !app.TimeBlocks.sameDayAsLast( timeblock.get('order') ) ) {
-                $('#timeblock-list').append( this.dateGroupTemplate({
-                    date: timeblock.get('start')
+                $('#timeblock-list').append(
+                    this.dateGroupTemplate({ date: timeblock.get('start') }),
+                    view.render().el
+                );
+            } else {
+                $('#timeblock-list').append( view.render().el );
+            }
+            
+            if ( !app.TimeBlocks.sameDayAsNext(timeblock.get('order')) && !$('#timeblock-list dd:last-child').hasClass('datetotalhrs') ) {
+                var totalHrs = app.TimeBlocks.forDate(timeblock.get('start'))
+                        .map(function(tb) {return tb.totalhrs()} )
+                        .reduce(function(memo, hrAmt) { return memo + hrAmt });
+                $('#timeblock-list').append(this.dateTotalHrsTemplate({
+                    totalHrs: totalHrs.round(2)
                 }));
             }
-			$('#timeblock-list').append( view.render().el );
+
 		},
 
 		// Add all items in the **TimeBlocks** collection at once.

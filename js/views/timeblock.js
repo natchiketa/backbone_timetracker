@@ -39,7 +39,9 @@ $(function () {
 
         // Re-render the titles of the time block item.
         render: function () {
-            var context = _.extend(this.model.toJSON(), {totalHrs: this.model.totalhrs().round(2)});
+            var context = _.extend(this.model.toJSON(), {
+                totalHrs: this.model.totalhrs().round(2)
+            });
             this.$el.html(this.template(context));
             this.$el.toggleClass('running', !this.model.get('completed'));
             this.$el.toggleClass('completed', this.model.get('completed'));
